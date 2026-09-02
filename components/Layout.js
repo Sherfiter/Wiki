@@ -56,7 +56,7 @@ function Header() {
                 <ul className="flex space-x-8">
                   <li>
                     <a className="hover:text-sky-500 dark:hover:text-sky-400" href="/GSE/2026/">
-                      生成式软件工程 (2026 秋)
+                      个人兴趣
                     </a>
                   </li>
                 </ul>
@@ -73,11 +73,13 @@ function Footer() {
   return (
     <div className="bg-neutral-100 text-center text-neutral-600 dark:bg-neutral-600 dark:text-neutral-200 lg:text-left">
       <div className="bg-neutral-200 p-6 text-center dark:bg-neutral-700">
-        <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">
+        {/* <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">
           Creative Commons License: BY-NC 4.0
-        </a>
+        </a> */}
         <br />
-        <a href="https://beian.miit.gov.cn/">苏 ICP 备 2020049101 号</a>
+        {/* <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer">
+          苏 ICP 备 2020049101 号
+        </a> */}
       </div>
     </div>
   );

@@ -287,3 +287,15 @@
 .wiki .terminal-window{border-radius:.375rem}
 .wiki .slideshow,.wiki .terminal-window{display:inline-block;--tw-bg-opacity:1;background-color:rgb(243 244 246/var(--tw-bg-opacity));font-weight:700;border:1px solid #acacac;box-shadow:2px 2px 5px #acacac}
 .wiki .terminal-titlebar{-webkit-user-select:none;-moz-user-select:none;user-select:none;padding-left:.5rem;padding-right:.5rem;padding-top:.25rem;text-align:left;font-size:.875rem;line-height:1.25rem;--tw-text-opacity:1;color:rgb(15 23 42/var(--tw-text-opacity));border-top:1px solid #f3f1f3;border-bottom:1px solid #b1aeb1;border-top-left-radius:6px;border-top-right-radius:6px}
+
+/* ---------------- homepage profile table (content/index.md) ---------------- */
+.wiki table:has(img[alt*="Siyuan Qiao"]){width:100%;margin:1rem 0;border:0;table-layout:fixed}
+.wiki table:has(img[alt*="Siyuan Qiao"]) :is(th,td){border:0;padding:.25rem .5rem;vertical-align:top}
+.wiki table:has(img[alt*="Siyuan Qiao"]) thead th{padding:0;height:0;line-height:0}
+.wiki table:has(img[alt*="Siyuan Qiao"]) tbody tr{border:0}
+.wiki table:has(img[alt*="Siyuan Qiao"]) td:first-child{width:15.5rem;text-align:center}
+.wiki table:has(img[alt*="Siyuan Qiao"]) img{border-radius:9999px;width:9rem;height:9rem;-o-object-fit:cover;object-fit:cover;margin:0 auto 1rem;display:block}
+@media (max-width:767px){
+  .wiki table:has(img[alt*="Siyuan Qiao"]) td:first-child{width:36%}
+  .wiki table:has(img[alt*="Siyuan Qiao"]) img{width:6.5rem;height:6.5rem}
+}
