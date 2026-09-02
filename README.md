@@ -8,7 +8,7 @@
 
 
 
-## to get me（几秒钟就可以看内容）
+## to get me（node npm做前两步 几秒钟就可以看内容）
 
 ```bash
 
