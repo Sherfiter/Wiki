@@ -57,6 +57,49 @@ function Quiz({ title, question, options, answer, comment }) {
   );
 }
 
+function Profile({ avatar, name, links = [], children }) {
+  return (
+    <div className="profile-layout">
+      <aside className="profile-sidebar">
+        <img className="profile-avatar" src={avatar} alt={name} />
+        <ul className="profile-links">
+          {links.map((link) => (
+            <li key={link.value}>
+              <span className="profile-link-name">{link.name}</span>
+              <a
+                href={link.href}
+                target={link.href.startsWith('http') ? '_blank' : undefined}
+                rel={link.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+              >
+                {link.value}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </aside>
+      <div className="profile-body">{children}</div>
+    </div>
+  );
+}
+
+function Projects({ projects = [] }) {
+  return (
+    <ul className="project-list">
+      {projects.map((p) => (
+        <li key={p.name} className="project-card">
+          <div className="project-head">
+            <a href={p.url} target="_blank" rel="noopener noreferrer">
+              {p.name}
+            </a>
+            {p.lang && <span className="project-lang">{p.lang}</span>}
+          </div>
+          {p.desc && <p className="project-desc">{p.desc}</p>}
+        </li>
+      ))}
+    </ul>
+  );
+}
+
 function Slideshow({ url }) {
   return (
     <div className="mx-20">
@@ -73,4 +116,6 @@ export const mdxComponents = {
   Box,
   Quiz,
   Slideshow,
+  Profile,
+  Projects,
 };

@@ -288,14 +288,33 @@
 .wiki .slideshow,.wiki .terminal-window{display:inline-block;--tw-bg-opacity:1;background-color:rgb(243 244 246/var(--tw-bg-opacity));font-weight:700;border:1px solid #acacac;box-shadow:2px 2px 5px #acacac}
 .wiki .terminal-titlebar{-webkit-user-select:none;-moz-user-select:none;user-select:none;padding-left:.5rem;padding-right:.5rem;padding-top:.25rem;text-align:left;font-size:.875rem;line-height:1.25rem;--tw-text-opacity:1;color:rgb(15 23 42/var(--tw-text-opacity));border-top:1px solid #f3f1f3;border-bottom:1px solid #b1aeb1;border-top-left-radius:6px;border-top-right-radius:6px}
 
-/* ---------------- homepage profile table (content/index.md) ---------------- */
-.wiki table:has(img[alt*="Siyuan Qiao"]){width:100%;margin:1rem 0;border:0;table-layout:fixed}
-.wiki table:has(img[alt*="Siyuan Qiao"]) :is(th,td){border:0;padding:.25rem .5rem;vertical-align:top}
-.wiki table:has(img[alt*="Siyuan Qiao"]) thead th{padding:0;height:0;line-height:0}
-.wiki table:has(img[alt*="Siyuan Qiao"]) tbody tr{border:0}
-.wiki table:has(img[alt*="Siyuan Qiao"]) td:first-child{width:15.5rem;text-align:center}
-.wiki table:has(img[alt*="Siyuan Qiao"]) img{border-radius:9999px;width:9rem;height:9rem;-o-object-fit:cover;object-fit:cover;margin:0 auto 1rem;display:block}
-@media (max-width:767px){
-  .wiki table:has(img[alt*="Siyuan Qiao"]) td:first-child{width:36%}
-  .wiki table:has(img[alt*="Siyuan Qiao"]) img{width:6.5rem;height:6.5rem}
+/* ---------------- homepage profile sidebar (content/index.md) ---------------- */
+.profile-layout{display:flex;align-items:flex-start;gap:0}
+.profile-sidebar{flex:0 0 auto;display:flex;flex-direction:column;align-items:center;gap:1.25rem;padding-right:1.75rem}
+.profile-avatar{width:7rem;height:7rem;border-radius:9999px;object-fit:cover;display:block;margin:0;box-shadow:0 0 0 4px #fff,0 14px 28px -8px rgba(15,23,42,.28)}
+.profile-links{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;align-items:center;gap:.8rem}
+.profile-links li{display:flex;flex-direction:column;align-items:center;gap:.1rem;margin:0;padding:0}
+.profile-link-name{font-size:.6875rem;line-height:1.2;color:rgb(100 116 139)}
+.profile-links a{display:block;text-align:center;white-space:nowrap;font-size:.8125rem;line-height:1.4;color:rgb(55 48 163);text-decoration:none;transition:color .15s ease}
+.profile-links a:hover{color:rgb(30 27 75);text-decoration:underline}
+.profile-body{flex:1 1 auto;min-width:0;padding-left:1.75rem;border-left:1px solid rgba(226,232,240,.9)}
+.profile-body h1{padding-top:0}
+.wiki .profile-body h1+p:first-letter{float:none;margin:0;font-size:inherit;line-height:inherit;font-weight:inherit;color:inherit}
+.wiki .profile-body h1+p:first-line{text-transform:none;letter-spacing:normal}
+@media (max-width:640px){
+  .profile-layout{flex-direction:column}
+  .profile-sidebar{flex-direction:row;flex-wrap:wrap;justify-content:center;width:100%;padding-right:0}
+  .profile-avatar{width:6rem;height:6rem}
+  .profile-links{width:auto;flex-direction:row;flex-wrap:wrap;justify-content:center}
+  .profile-body{padding-left:0;border-left:0;margin-top:1rem;padding-top:1.25rem;border-top:1px solid rgba(226,232,240,.9)}
 }
+
+/* ---------------- homepage project cards (content/index.md) ---------------- */
+.project-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:.75rem}
+.project-card{display:block;margin:0;padding:.8rem 1rem;border:1px solid rgba(226,232,240,.9);border-radius:.5rem;background-color:rgba(248,250,252,.5);transition:box-shadow .15s ease,border-color .15s ease}
+.project-card:hover{box-shadow:0 6px 16px -4px rgba(15,23,42,.12);border-color:rgb(203 213 225)}
+.project-head{display:flex;align-items:center;gap:.6rem;flex-wrap:wrap}
+.project-head a{font-weight:600;font-size:.9375rem;line-height:1.4;text-decoration:none}
+.project-head a:hover{text-decoration:underline}
+.project-lang{font-size:.6875rem;line-height:1;padding:.2rem .5rem;border-radius:9999px;background-color:rgba(226,232,240,.8);color:rgb(71 85 105);white-space:nowrap}
+.project-desc{margin:.35rem 0 0;font-size:.8125rem;line-height:1.5;color:rgb(100 116 139);text-align:left;text-indent:0}

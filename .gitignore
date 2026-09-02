@@ -31,3 +31,8 @@ pnpm-debug.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+
+.txt
+.jpg
+.claude
