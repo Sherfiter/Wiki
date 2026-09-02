@@ -5,10 +5,6 @@
 > **⚠️ 复刻声明（Copy from jyy）**
 >
 > 本项目整体**复刻自 [jyy 的个人 Wiki](https://jyywiki.cn/)**（作者：南京大学 蒋炎岩 / jyy）。
-> 站点架构、页面布局、自定义样式（`.wiki` / `.box` / `.quiz-card` 等 284 条 CSS 规则）、
-> MDX 组件（`Box` / `Quiz` / `Slideshow`）以及首页内容均来源于原站。
-> 原站采用 [CC BY-NC 4.0](http://creativecommons.org/licenses/by-nc/4.0/) 许可，
-> 请遵守其许可条款使用。
 
 ---
 
