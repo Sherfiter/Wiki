@@ -58,6 +58,28 @@ function Quiz({ title, question, options, answer, comment }) {
 }
 
 function Profile({ avatar, name, links = [], children }) {
+  const [qr, setQr] = useState(null);
+
+  const renderLink = (link) => {
+    if (link.qr)
+      return (
+        <button type="button" className="profile-qr-link" onClick={() => setQr(link)}>
+          {link.value}
+        </button>
+      );
+    if (link.href)
+      return (
+        <a
+          href={link.href}
+          target={link.href.startsWith('http') ? '_blank' : undefined}
+          rel={link.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+        >
+          {link.value}
+        </a>
+      );
+    return <span className="profile-plain-text">{link.value}</span>;
+  };
+
   return (
     <div className="profile-layout">
       <aside className="profile-sidebar">
@@ -66,18 +88,31 @@ function Profile({ avatar, name, links = [], children }) {
           {links.map((link) => (
             <li key={link.value}>
               <span className="profile-link-name">{link.name}</span>
-              <a
-                href={link.href}
-                target={link.href.startsWith('http') ? '_blank' : undefined}
-                rel={link.href.startsWith('http') ? 'noopener noreferrer' : undefined}
-              >
-                {link.value}
-              </a>
+              {renderLink(link)}
             </li>
           ))}
         </ul>
       </aside>
       <div className="profile-body">{children}</div>
+      {qr && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/60"
+          onClick={() => setQr(null)}
+        >
+          <div
+            className="bg-white rounded-lg p-6 shadow-xl text-center"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="mb-3 font-serif font-bold text-slate-800">{qr.qrTitle}</div>
+            <img
+              className="mx-auto max-h-[75vh] w-auto max-w-[85vw]"
+              src={qr.qr}
+              alt={qr.name}
+            />
+            <div className="mt-3 text-xs text-slate-500">点击任意处关闭</div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

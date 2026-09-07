@@ -8,7 +8,8 @@ title: Siyuan Qiao
   links={[
     { name: 'GitHub', value: 'github.com/Sherfiter', href: 'https://github.com/Sherfiter' },
     { name: 'Gmail', value: 'bushigemenba@gmail.com', href: 'mailto:bushigemenba@gmail.com' },
-    
+    { name: 'QQ群', value: '622958952', qr: '/OS/2026/static/img/qqgroup.png', qrTitle: 'QQ群二维码' },
+    { name: 'WeChat', value: 'jyayst66666', qr: '/OS/2026/static/img/wecode.png', qrTitle: '个人wechat'},
   ]}
 >
 
@@ -16,13 +17,11 @@ title: Siyuan Qiao
 
 你好，我是 **乔思源**。
 
-19岁之前是个彻头彻尾的fw
+一直都认为自己是一个fw
 
 我也不知道我究竟应该怎么活着 
 
-感觉世界是个巨大的人情世故 
-
-和我的性格恰恰相反
+一直在探索这个世界到底是什么样的 
 
 对Linux kernel 感兴趣 
 
