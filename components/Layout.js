@@ -52,18 +52,13 @@ export default function Layout({ title, children }) {
     <>
       <Head>
         <title>{title || "Sherfiter's Wiki"}</title>
+        <link rel="stylesheet" href="/vendor/fira-mono/fira-mono.css" />
         <link
           rel="stylesheet"
           href="https://npm.elemecdn.com/lxgw-wenkai-webfont@1.7.0/style.css"
         />
-        <link
-          rel="stylesheet"
-          href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"
-        />
-        <link
-          rel="stylesheet"
-          href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/styles/default.min.css"
-        />
+        <link rel="stylesheet" href="/vendor/katex/katex.min.css" />
+        <link rel="stylesheet" href="/vendor/hljs/default.css" />
       </Head>
       <div className="bg-slate-300/10">
         <Header />
