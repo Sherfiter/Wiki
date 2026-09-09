@@ -100,9 +100,9 @@
 .wiki .box-green{border-color:rgb(52 211 153/var(--tw-border-opacity));background-color:rgb(209 250 229/var(--tw-bg-opacity))}
 .wiki .box-green,.wiki .box-violet{--tw-border-opacity:1;--tw-bg-opacity:1;padding-left:.25rem;padding-right:.25rem}
 .wiki .box-violet{border-color:rgb(167 139 250/var(--tw-border-opacity));background-color:rgb(237 233 254/var(--tw-bg-opacity))}
-.wiki details>div>h2{margin:0;padding:0;font-family:Fira Mono}
+.wiki details>div>h2{margin:0;padding:0;font-family:'LXGW WenKai Mono','Fira Mono'}
 .wiki details>div>ol{margin-bottom:0}
-.wiki details li,.wiki details p{font-family:Fira Mono}
+.wiki details li,.wiki details p{font-family:'LXGW WenKai Mono','Fira Mono'}
 .wiki h1{margin:0 0 1rem;padding:1.5rem 0 0;font-family:'LXGW WenKai',Kaiti SC,STKaiti,KaiTi,sans-serif;font-size:1.5rem;line-height:2rem;font-weight:700}
 .wiki h2{padding:1.5rem 0 .5rem;font-size:1.25rem}
 .wiki h2,.wiki h3{margin:0;font-family:'LXGW WenKai',Kaiti SC,STKaiti,KaiTi,sans-serif;line-height:1.75rem;font-weight:700}
@@ -156,12 +156,12 @@
 .wiki-new :not(pre)>code{--tw-text-opacity:1;color:rgb(241 245 249/var(--tw-text-opacity))}
 .wiki-new :not(pre)>code{font-size:.85em;font-weight:200}
 .wiki-new :not(pre)>code:after,.wiki-new :not(pre)>code:before{content:none}
-.wiki-new pre{margin:.5rem 0;background-color:rgba(226,232,240,.7);padding:0;line-height:1.5;--tw-shadow:0 1px 3px 0 rgba(0,0,0,.1),0 1px 2px -1px rgba(0,0,0,.1);--tw-shadow-colored:0 1px 3px 0 var(--tw-shadow-color),0 1px 2px -1px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow,0 0 #0000),var(--tw-ring-shadow,0 0 #0000),var(--tw-shadow);overflow-x:auto;border-radius:.75rem;font-family:Fira Mono,monospace}
+.wiki-new pre{margin:.5rem 0;background-color:rgba(226,232,240,.7);padding:0;line-height:1.5;--tw-shadow:0 1px 3px 0 rgba(0,0,0,.1),0 1px 2px -1px rgba(0,0,0,.1);--tw-shadow-colored:0 1px 3px 0 var(--tw-shadow-color),0 1px 2px -1px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow,0 0 #0000),var(--tw-ring-shadow,0 0 #0000),var(--tw-shadow);overflow-x:auto;border-radius:.75rem;font-family:'LXGW WenKai Mono','Fira Mono',monospace}
 .wiki-new pre code{display:block;padding:.5rem;font-size:.9rem;line-height:1.2}
 .wiki-new .codehilite{margin-top:.75rem;margin-bottom:.75rem}
 .wiki-new .codehilite pre{margin-top:0;margin-bottom:0;padding-bottom:8px}
 .wiki-new .codehilite pre code{padding-bottom:0}
-.wiki-new .codehilite *,.wiki-new .codehilite pre code *{font-family:Fira Mono,monospace!important}
+.wiki-new .codehilite *,.wiki-new .codehilite pre code *{font-family:'LXGW WenKai Mono','Fira Mono',monospace!important}
 .wiki-new .codehilite .hll{background-color:#ffc}
 .wiki-new .codehilite .c{color:#408080;font-style:italic}
 .wiki-new .codehilite .err{border:1px solid red}
@@ -256,7 +256,7 @@
 .wiki-new .code-card h1:after,.wiki-new .note h1:after{content:": "}
 .wiki-new .code-card h1+p,.wiki-new .note h1+p{margin:0;display:inline;padding:0;text-indent:0}
 .wiki-new .code-card h1+p:first-letter,.wiki-new .note h1+p:first-letter{font-size:inherit;font-weight:inherit;color:inherit;margin:0;float:none}
-.wiki pre{background-color:#fff;border:1px solid #e2e8f0;border-radius:.5rem;box-shadow:0 1px 2px rgba(15,23,42,.04);margin:.5rem 0;padding:.6rem .75rem;line-height:1.6;color:#1f2937;overflow-x:auto;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.875rem}
+.wiki pre{background-color:#fff;border:1px solid #e2e8f0;border-radius:.5rem;box-shadow:0 1px 2px rgba(15,23,42,.04);margin:.5rem 0;padding:.6rem .75rem;line-height:1.6;color:#1f2937;overflow-x:auto;font-family:'LXGW WenKai Mono','Fira Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.875rem}
 .wiki pre>code{padding:0;background-color:transparent;font-weight:200}
 .wiki code:after,.wiki code:before{content:none}
 .wiki code{font-weight:200}

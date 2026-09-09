@@ -53,10 +53,7 @@ export default function Layout({ title, children }) {
       <Head>
         <title>{title || "Sherfiter's Wiki"}</title>
         <link rel="stylesheet" href="/vendor/fira-mono/fira-mono.css" />
-        <link
-          rel="stylesheet"
-          href="https://npm.elemecdn.com/lxgw-wenkai-webfont@1.7.0/style.css"
-        />
+        <link rel="stylesheet" href="/vendor/lxgw-wenkai/style.css" />
         <link rel="stylesheet" href="/vendor/katex/katex.min.css" />
         <link rel="stylesheet" href="/vendor/hljs/default.css" />
       </Head>
