@@ -1,62 +1,24 @@
 import Head from 'next/head';
-import { useRouter } from 'next/router';
-
-function getCookie(name) {
-  const prefix = name + '=';
-  const parts = decodeURIComponent(document.cookie).split(';');
-  for (let part of parts) {
-    while (part.charAt(0) === ' ') part = part.substring(1);
-    if (part.indexOf(prefix) === 0) return part.substring(prefix.length, part.length);
-  }
-  return '';
-}
-
-function setCookie(name, value, days) {
-  const d = new Date();
-  d.setFullYear(d.getFullYear() + days);
-  document.cookie = `${name}=${value};expires=${d.toUTCString()};path=/`;
-}
 
 function Header() {
-  const router = useRouter();
-
-  async function onSubmit(e) {
-    e.preventDefault();
-    const data = new FormData(e.currentTarget);
-    const token = data.get('token');
-    setCookie('token', token, 1);
-    router.reload(window.location.pathname);
-  }
-
-  let token = 'TOKEN';
-  if (typeof document !== 'undefined') {
-    const c = getCookie('token');
-    if (c) token = c;
-  }
-
   return (
     <div className="sticky top-0 z-40 w-full backdrop-blur flex-none border-b border-slate-900/10 bg-white/75 supports-backdrop-blur:bg-white/60">
       <div className="max-w-8xl mx-auto">
         <div className="py-4 border-b border-slate-900/10 lg:px-8 lg:border-0 dark:border-slate-300/10 mx-4 lg:mx-0">
           <div className="relative flex items-center">
             <a href="/">Sherfiter&apos;s wiki</a>
-            <form onSubmit={onSubmit} className="text-xs text-slate-500">
-              &nbsp;for&nbsp;
-              <input
-                type="text"
-                name="token"
-                className="font-mono text-xs w-16"
-                maxLength="8"
-                defaultValue={token}
-                onFocus={(e) => e.target.select()}
-              />
-            </form>
+            <span className="text-xs text-slate-500">&nbsp;for&nbsp;fun</span>
             <div className="relative hidden lg:flex items-center ml-4 pl-4 border-l">
               <nav className="text-sm leading-6 font-semibold text-slate-700 dark:text-slate-200">
                 <ul className="flex space-x-8">
                   <li>
                     <a className="hover:text-sky-500 dark:hover:text-sky-400" href="/interesting/2026/">
                       个人兴趣
+                    </a>
+                  </li>
+                  <li>
+                    <a className="hover:text-sky-500 dark:hover:text-sky-400" href="/course/">
+                      课程基本章节
                     </a>
                   </li>
                 </ul>
