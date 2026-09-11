@@ -4,7 +4,7 @@ title: "第 3 章 · SQL 基础"
 
 # 第 3 章 · SQL 基础
 
-SQL 是关系代数（第 2 章）的「英语」。它分四类子语言：**DDL**（定义结构）、**DML**（改数据）、**DQL**（查数据）、**DCL**（控权限）。本章覆盖前三类的基础，外加约束。
+SQL 是关系代数（第 2 章）的「英语」，分四类：**DDL**（定义结构）、**DML**（改数据）、**DQL**（查数据）、**DCL**（控权限）。
 
 ## 3.1 DDL：定义与修改结构
 
@@ -20,8 +20,8 @@ ALTER TABLE student ADD COLUMN email VARCHAR(50);
 DROP TABLE student;
 ```
 
-- `CREATE` 建对象，`ALTER` 改对象，`DROP` 删对象——三者对称。
-- 类型宽度写死（`CHAR(9)` 定长、`VARCHAR(20)` 变长），这是「模式固定」的体现，与第 10 章的 MongoDB 动态模式形成对照。
+- `CREATE` 建、`ALTER` 改、`DROP` 删。
+- 类型宽度写死（`CHAR(9)` 定长、`VARCHAR(20)` 变长）=「模式固定」，对照第 10 章 MongoDB 动态模式。
 
 ## 3.2 DML：插入、更新、删除
 
@@ -31,11 +31,9 @@ UPDATE student SET age = 20 WHERE sno = 'S001';
 DELETE FROM student WHERE sno = 'S001';
 ```
 
-要点：
-
 - `INSERT` 可一次多行，也可 `INSERT ... SELECT` 从查询结果导入。
-- `UPDATE`/`DELETE` 的 `WHERE` **省略则作用全表**，是最常见的翻车点。
-- 这些是**数据操作**，不是事务提交——单条 DML 是否自动提交取决于隔离级别和事务设置（见第 4、7 章）。
+- `UPDATE`/`DELETE` 省略 `WHERE` 则作用全表，最常见的翻车点。
+- 单条 DML 是否自动提交取决于隔离级别与事务设置（见第 4、7 章）。
 
 ## 3.3 DQL：单表查询
 
@@ -47,20 +45,20 @@ ORDER BY age DESC
 LIMIT 10;
 ```
 
-子句的**书写顺序固定**，但**逻辑执行顺序**完全不同：
+书写顺序固定，逻辑执行顺序不同：
 
 ```
 书写顺序: SELECT → FROM → WHERE → ORDER BY → LIMIT
 执行顺序: FROM → WHERE → SELECT → ORDER BY → LIMIT
 ```
 
-- `SELECT` 决定投影哪些列（第 2 章的 π），可用 `DISTINCT` 去重、用别名 `AS`。
-- `WHERE` 是行过滤（第 2 章的 σ），支持 `=, <>, >, <, BETWEEN, IN, LIKE, IS NULL`。
-- `ORDER BY` 排序，`LIMIT n`/`OFFSET m` 截取——**SQL 无「取第 k 大」的原子操作，只能排序后截取**。
+- `SELECT` 决定投影列（第 2 章 π），可 `DISTINCT` 去重、`AS` 别名。
+- `WHERE` 行过滤（第 2 章 σ），支持 `=, <>, >, <, BETWEEN, IN, LIKE, IS NULL`。
+- `ORDER BY` 排序，`LIMIT n`/`OFFSET m` 截取——**SQL 无「取第 k 大」原子操作，只能排序后截取**。
 
 ## 3.4 约束：把完整性写进结构
 
-第 2 章的三类完整性在这里落地为四种约束：
+第 2 章三类完整性落地为四种约束：
 
 | 约束 | SQL | 对应的完整性 |
 |---|---|---|
@@ -79,8 +77,6 @@ CREATE TABLE sc (
 );
 ```
 
-外键默认「拒绝违反」；可选 `ON DELETE CASCADE` 级联删除。**约束写得越全，DBMS 帮你挡的错误越多，数据越不可能进入非法状态。**
+外键默认拒绝违反，可选 `ON DELETE CASCADE` 级联删除。约束写得越全，DBMS 帮你挡的错误越多。
 
-> 对比：SQL 标准 vs MySQL / PostgreSQL 方言——标准由 ISO/IEC 维护，但各库实现有偏差：MySQL 的 `CHECK` 长期被忽略（8.0 前不真正强制）、`AUTO_INCREMENT` 非标准（PG 用 `SERIAL`/`GENERATED`）、字符串默认大小写不敏感；PostgreSQL 更贴近标准，`CHECK` 强制、支持 `GENERATED`、布尔类型 `BOOLEAN` 是原生；MySQL 的 `LIMIT` 在标准里是 `FETCH FIRST n ROWS ONLY`（PG 两者都认）。结论：**写「能跑」的 SQL 要盯目标方言，写「可移植」的 SQL 要避开库特有语法。** 具体选型见第 10 章。
-
-> 承上启下：本章把第 2 章的抽象运算翻译成了可执行语句——`SELECT` 是投影、`WHERE` 是选择、`PRIMARY/FOREIGN KEY` 是三类约束。但单表只是热身，现实查询几乎都跨多张表，那正是第 4 章的主场（连接、子查询、聚合）。约束的「强制」与「延迟」在事务语境下会更有味道（第 7 章）。
+> 对比：SQL 标准 vs MySQL / PostgreSQL 方言——标准由 ISO/IEC 维护，各库有偏差：MySQL 的 `CHECK` 8.0 前不强制、`AUTO_INCREMENT` 非标准（PG 用 `SERIAL`/`GENERATED`）、字符串默认大小写不敏感；PG 更贴标准，`CHECK` 强制、`BOOLEAN` 原生；MySQL 的 `LIMIT` 标准写法是 `FETCH FIRST n ROWS ONLY`。写「能跑」的 SQL 盯目标方言，写「可移植」的避开库特有语法。选型见第 10 章。

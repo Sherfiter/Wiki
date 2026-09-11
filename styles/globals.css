@@ -50,7 +50,7 @@
 .wiki :where(h4 code):not(:where([class~=not-wiki],[class~=not-wiki] *)){color:inherit}
 .wiki :where(blockquote code):not(:where([class~=not-wiki],[class~=not-wiki] *)){color:inherit}
 .wiki :where(thead th code):not(:where([class~=not-wiki],[class~=not-wiki] *)){color:inherit}
-.wiki :where(pre):not(:where([class~=not-wiki],[class~=not-wiki] *)){color:var(--tw-prose-pre-code);background-color:var(--tw-prose-pre-bg);overflow-x:auto;font-weight:400;font-size:.875em;line-height:1.7142857;margin-top:1.7142857em;margin-bottom:1.7142857em;border-radius:.375rem;padding:.8571429em 1.1428571em}
+.wiki :where(pre):not(:where([class~=not-wiki],[class~=not-wiki] *)){color:var(--tw-prose-pre-code);background-color:var(--tw-prose-pre-bg);overflow-x:auto;font-weight:400;font-size:.875em;line-height:1.7142857;margin-top:1.7142857em;margin-bottom:1.7142857em;border-radius:0;padding:.8571429em 1.1428571em}
 .wiki :where(pre code):not(:where([class~=not-wiki],[class~=not-wiki] *)){background-color:transparent;border-width:0;border-radius:0;padding:0;font-weight:inherit;color:inherit;font-size:inherit;font-family:inherit;line-height:inherit}
 .wiki :where(pre code):not(:where([class~=not-wiki],[class~=not-wiki] *)):before{content:none}
 .wiki :where(pre code):not(:where([class~=not-wiki],[class~=not-wiki] *)):after{content:none}
@@ -90,16 +90,7 @@
 .wiki :where(figure):not(:where([class~=not-wiki],[class~=not-wiki] *)){margin-top:2em;margin-bottom:2em}
 .wiki :where(.wiki>:first-child):not(:where([class~=not-wiki],[class~=not-wiki] *)){margin-top:0}
 .wiki :where(.wiki>:last-child):not(:where([class~=not-wiki],[class~=not-wiki] *)){margin-bottom:0}
-.wiki green{--tw-text-opacity:1;color:rgb(21 128 61/var(--tw-text-opacity))}
-.wiki red,.wiki red>a{--tw-text-opacity:1;color:rgb(185 28 28/var(--tw-text-opacity))}
-.wiki red>a{text-decoration-line:underline}
 .wiki img{margin-top:.5rem;margin-bottom:.5rem;padding-top:0;padding-bottom:0}
-.wiki .box-gray{border-color:rgb(148 163 184/var(--tw-border-opacity));background-color:rgb(241 245 249/var(--tw-bg-opacity))}
-.wiki .box-blue,.wiki .box-gray{--tw-border-opacity:1;--tw-bg-opacity:1;padding-left:.25rem;padding-right:.25rem}
-.wiki .box-blue{border-color:rgb(56 189 248/var(--tw-border-opacity));background-color:rgb(224 242 254/var(--tw-bg-opacity))}
-.wiki .box-green{border-color:rgb(52 211 153/var(--tw-border-opacity));background-color:rgb(209 250 229/var(--tw-bg-opacity))}
-.wiki .box-green,.wiki .box-violet{--tw-border-opacity:1;--tw-bg-opacity:1;padding-left:.25rem;padding-right:.25rem}
-.wiki .box-violet{border-color:rgb(167 139 250/var(--tw-border-opacity));background-color:rgb(237 233 254/var(--tw-bg-opacity))}
 .wiki details>div>h2{margin:0;padding:0;font-family:'LXGW WenKai Mono','Fira Mono'}
 .wiki details>div>ol{margin-bottom:0}
 .wiki details li,.wiki details p{font-family:'LXGW WenKai Mono','Fira Mono'}
@@ -156,7 +147,7 @@
 .wiki-new :not(pre)>code{--tw-text-opacity:1;color:rgb(241 245 249/var(--tw-text-opacity))}
 .wiki-new :not(pre)>code{font-size:.85em;font-weight:200}
 .wiki-new :not(pre)>code:after,.wiki-new :not(pre)>code:before{content:none}
-.wiki-new pre{margin:.5rem 0;background-color:rgba(226,232,240,.7);padding:0;line-height:1.5;--tw-shadow:0 1px 3px 0 rgba(0,0,0,.1),0 1px 2px -1px rgba(0,0,0,.1);--tw-shadow-colored:0 1px 3px 0 var(--tw-shadow-color),0 1px 2px -1px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow,0 0 #0000),var(--tw-ring-shadow,0 0 #0000),var(--tw-shadow);overflow-x:auto;border-radius:.75rem;font-family:'LXGW WenKai Mono','Fira Mono',monospace}
+.wiki-new pre{margin:.5rem 0;background-color:rgba(226,232,240,.7);padding:0;line-height:1.5;--tw-shadow:0 1px 3px 0 rgba(0,0,0,.1),0 1px 2px -1px rgba(0,0,0,.1);--tw-shadow-colored:0 1px 3px 0 var(--tw-shadow-color),0 1px 2px -1px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow,0 0 #0000),var(--tw-ring-shadow,0 0 #0000),var(--tw-shadow);overflow-x:auto;border-radius:0;font-family:'LXGW WenKai Mono','Fira Mono',monospace}
 .wiki-new pre code{display:block;padding:.5rem;font-size:.9rem;line-height:1.2}
 .wiki-new .codehilite{margin-top:.75rem;margin-bottom:.75rem}
 .wiki-new .codehilite pre{margin-top:0;margin-bottom:0;padding-bottom:8px}
@@ -223,7 +214,7 @@
 .wiki-new .slideshow>div{display:flex;min-height:0;flex:1 1 0%;flex-direction:column}
 .wiki-new .slideshow :has(>img){flex:1 1 0;min-height:0;display:flex;text-indent:0}
 .wiki-new .slideshow img{width:100%;max-width:100%;max-height:100%;-o-object-fit:contain;object-fit:contain}
-.wiki-new .code-card,.wiki-new .note,.wiki-new .slideshow{margin:.5rem 1rem .25rem;border-radius:.375rem;border-width:1px;--tw-border-opacity:1;border-color:rgb(148 163 184/var(--tw-border-opacity));padding:.5rem 1rem;line-height:1.25rem;--tw-shadow:0 4px 6px -1px rgba(0,0,0,.1),0 2px 4px -2px rgba(0,0,0,.1);--tw-shadow-colored:0 4px 6px -1px var(--tw-shadow-color),0 2px 4px -2px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow,0 0 #0000),var(--tw-ring-shadow,0 0 #0000),var(--tw-shadow)}
+.wiki-new .code-card,.wiki-new .note,.wiki-new .slideshow{margin:.5rem 1rem .25rem;border-radius:0;border-width:1px;--tw-border-opacity:1;border-color:rgb(148 163 184/var(--tw-border-opacity));padding:.5rem 1rem;line-height:1.25rem;--tw-shadow:0 4px 6px -1px rgba(0,0,0,.1),0 2px 4px -2px rgba(0,0,0,.1);--tw-shadow-colored:0 4px 6px -1px var(--tw-shadow-color),0 2px 4px -2px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow,0 0 #0000),var(--tw-ring-shadow,0 0 #0000),var(--tw-shadow)}
 .wiki-new .code-card>div,.wiki-new .note>div{padding:0}
 .wiki-new .slideshow>div{padding:0;overflow:hidden}
 .wiki-new .slideshow{margin-left:auto;margin-right:auto;display:flex;width:100%;flex-direction:column}
@@ -256,8 +247,8 @@
 .wiki-new .code-card h1:after,.wiki-new .note h1:after{content:": "}
 .wiki-new .code-card h1+p,.wiki-new .note h1+p{margin:0;display:inline;padding:0;text-indent:0}
 .wiki-new .code-card h1+p:first-letter,.wiki-new .note h1+p:first-letter{font-size:inherit;font-weight:inherit;color:inherit;margin:0;float:none}
-.wiki pre{background-color:#fff;border:1px solid #e2e8f0;border-radius:.5rem;box-shadow:0 1px 2px rgba(15,23,42,.04);margin:.5rem 0;padding:.6rem .75rem;line-height:1.6;color:#1f2937;overflow-x:auto;font-family:'LXGW WenKai Mono','Fira Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.875rem}
-.wiki pre>code{padding:0;background-color:transparent;font-weight:200}
+.wiki pre{background-color:transparent;border:1px solid #e2e8f0;border-radius:2px;margin:.5rem 0;padding:.75rem 1rem;line-height:1.6;color:#1f2937;overflow-x:auto;font-family:'LXGW WenKai Mono','Fira Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.875rem}
+.wiki pre>code{padding:0;background-color:transparent;font-weight:400}
 .wiki code:after,.wiki code:before{content:none}
 .wiki code{font-weight:200}
 .wiki blockquote{margin-top:.5rem;margin-bottom:.5rem;padding-top:0;padding-bottom:0;font-style:normal}
@@ -266,7 +257,7 @@
 .wiki{padding:0;text-align:justify;font-family:'LXGW WenKai',Kaiti SC,STKaiti,KaiTi,sans-serif;--tw-text-opacity:1;color:rgb(15 23 42/var(--tw-text-opacity))}
 .wiki{border-width:1px;padding:2.5rem;--tw-shadow:0 10px 15px -3px rgba(0,0,0,.1),0 4px 6px -4px rgba(0,0,0,.1);--tw-shadow-colored:0 10px 15px -3px var(--tw-shadow-color),0 4px 6px -4px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow,0 0 #0000),var(--tw-ring-shadow,0 0 #0000),var(--tw-shadow)}
 .wiki{max-width:768px}
-.wiki .box{margin:.75rem 1rem 1rem;border-radius:.375rem;border-width:1px;--tw-border-opacity:1;border-color:rgb(148 163 184/var(--tw-border-opacity));padding:.5rem 1rem;line-height:1.25rem;--tw-shadow:0 4px 6px -1px rgba(0,0,0,.1),0 2px 4px -2px rgba(0,0,0,.1);--tw-shadow-colored:0 4px 6px -1px var(--tw-shadow-color),0 2px 4px -2px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow,0 0 #0000),var(--tw-ring-shadow,0 0 #0000),var(--tw-shadow)}
+.wiki .box{margin:.75rem 1rem 1rem;border-radius:2px;border-width:1px;--tw-border-opacity:1;border-color:rgb(148 163 184/var(--tw-border-opacity));padding:.5rem 1rem;line-height:1.25rem;--tw-shadow:0 4px 6px -1px rgba(0,0,0,.1),0 2px 4px -2px rgba(0,0,0,.1);--tw-shadow-colored:0 4px 6px -1px var(--tw-shadow-color),0 2px 4px -2px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow,0 0 #0000),var(--tw-ring-shadow,0 0 #0000),var(--tw-shadow)}
 .wiki .box h3{margin-top:0;margin-bottom:0;padding-top:0;padding-bottom:0;font-size:1.125rem;line-height:1.75rem}
 .wiki .box li,.wiki .box p{margin-top:.25rem;margin-bottom:.25rem}
 .wiki .box>p+ol,.wiki .box>p+p,.wiki .box>p+ul{margin-top:0;margin-bottom:0}
@@ -275,16 +266,9 @@
 .yellow-box{background-color:hsla(48,96%,89%,.6)}
 .blue-box{background-color:rgba(219,234,254,.6)}
 .purple-box{background-color:rgba(243,232,255,.6)}
-.badge-yellow{--tw-bg-opacity:1;background-color:rgb(253 224 71/var(--tw-bg-opacity))}
-.badge-red{--tw-bg-opacity:1;background-color:rgb(252 165 165/var(--tw-bg-opacity))}
-.badge-green{--tw-bg-opacity:1;background-color:rgb(134 239 172/var(--tw-bg-opacity))}
-.badge-gray{--tw-bg-opacity:1;background-color:rgb(203 213 225/var(--tw-bg-opacity))}
-.wiki .verdict-no{background-color:rgb(252 165 165/var(--tw-bg-opacity));color:rgb(153 27 27/var(--tw-text-opacity))}
-.wiki .verdict-no,.wiki .verdict-yes{border-radius:.25rem;--tw-bg-opacity:1;padding-left:.25rem;padding-right:.25rem;--tw-text-opacity:1}
-.wiki .verdict-yes{background-color:rgb(134 239 172/var(--tw-bg-opacity));color:rgb(22 101 52/var(--tw-text-opacity))}
-.wiki .terminal-window{border-radius:.375rem}
+.wiki .terminal-window{border-radius:0}
 .wiki .slideshow,.wiki .terminal-window{display:inline-block;--tw-bg-opacity:1;background-color:rgb(243 244 246/var(--tw-bg-opacity));font-weight:700;border:1px solid #acacac;box-shadow:2px 2px 5px #acacac}
-.wiki .terminal-titlebar{-webkit-user-select:none;-moz-user-select:none;user-select:none;padding-left:.5rem;padding-right:.5rem;padding-top:.25rem;text-align:left;font-size:.875rem;line-height:1.25rem;--tw-text-opacity:1;color:rgb(15 23 42/var(--tw-text-opacity));border-top:1px solid #f3f1f3;border-bottom:1px solid #b1aeb1;border-top-left-radius:6px;border-top-right-radius:6px}
+.wiki .terminal-titlebar{-webkit-user-select:none;-moz-user-select:none;user-select:none;padding-left:.5rem;padding-right:.5rem;padding-top:.25rem;text-align:left;font-size:.875rem;line-height:1.25rem;--tw-text-opacity:1;color:rgb(15 23 42/var(--tw-text-opacity));border-top:1px solid #f3f1f3;border-bottom:1px solid #b1aeb1}
 
 /* ---------------- homepage profile sidebar (content/index.md) ---------------- */
 .profile-layout{display:flex;align-items:flex-start;gap:0}

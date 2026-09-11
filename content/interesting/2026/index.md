@@ -12,13 +12,13 @@ title: 个人兴趣
 
 ## 今日公告
 
-<Box title="作息警告" logo="⏰">
+<Box title="作息警告" color="yellow">
 
 怎么样作息才能好
 
 </Box>
 
-<Box title="晕 3D 预警" logo="⚠️">
+<Box title="晕 3D 预警" color="red">
 
 影之刃零想玩，但我 tm 晕 3D，玩半小时得缓一小时。
 
@@ -39,22 +39,29 @@ title: 个人兴趣
 ```c
 #include <stdio.h>
 
-int main() {
-  // C 程序员的一生
-  printf("出生：Hello, World!\n");
-  printf("成长：指针满天飞\n");
-  printf("成熟：段错误 (core dumped)\n");
-  printf("顿悟：数组越界了\n");
-  return 0; // 0 表示成功，也表示“终于成功了”
+// Quake III 的传奇：用「魔数 + 位运算 + 牛顿法」逼近 1/√x
+float inv_sqrt(float x) {
+    long i;
+    float x2 = x * 0.5f;
+    i = *(long *)&x;              // 把浮点的位模式当作整数看
+    i = 0x5f3759df - (i >> 1);    // 魔数：一步就非常接近
+    x = *(float *)&i;
+    x = x * (1.5f - x2 * x * x);  // 牛顿迭代精修一步
+    return x;
+}
+
+int main(void) {
+    printf("1/√2 ≈ %f\n", inv_sqrt(2.0f));
+    return 0;
 }
 ```
 
 ## 公式示例
 
-数学有时候很反直觉，比如欧拉恒等式 $e^{i\pi} + 1 = 0$ 把最著名的五个常数串在了一起；更离谱的是：
+心形线，网传是笛卡尔写给公主的：
 
 $$
-1 + 2 + 3 + 4 + \cdots = -\frac{1}{12}
+(x^2 + y^2 - 1)^3 = x^2 y^3
 $$
 
-（严格来说这是拉马努金求和，别真拿它当普通加法用。）
+（严格说这是后人附会，笛卡尔真正研究的是极坐标心形线 $r = a(1 - \sin\theta)$。）
