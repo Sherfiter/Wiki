@@ -52,6 +52,7 @@ export default function Layout({ title, children }) {
     <>
       <Head>
         <title>{title || "Sherfiter's Wiki"}</title>
+        <link rel="icon" type="image/png" href="/OS/2026/static/img/wiki.png" />
         <link rel="stylesheet" href="/vendor/fira-mono/fira-mono.css" />
         <link rel="stylesheet" href="/vendor/lxgw-wenkai/style.css" />
         <link rel="stylesheet" href="/vendor/katex/katex.min.css" />
