@@ -99,7 +99,6 @@
 .wiki h2,.wiki h3{margin:0;font-family:'LXGW WenKai',Kaiti SC,STKaiti,KaiTi,sans-serif;line-height:1.75rem;font-weight:700}
 .wiki h3{padding:.5rem 0;font-size:1.125rem}
 .wiki h1+p{margin-top:.5rem}
-.wiki h1+p{text-indent:0}
 .wiki h1+h2{padding-top:.5rem}
 .wiki h2+h3{padding-top:0}
 .wiki>p+ol,.wiki>p+p,.wiki>p+ul{margin-top:.25rem;margin-bottom:.25rem}

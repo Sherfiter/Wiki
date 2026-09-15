@@ -25,6 +25,8 @@ title: Siyuan Qiao
 
 一直在探索这个世界到底是什么样的 
 
+[去经历](/interesting/2026/学习经历)
+
 对Linux kernel 感兴趣 
 
 任尔东西南北风 天塌不下来

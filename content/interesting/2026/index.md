@@ -6,9 +6,10 @@ title: 个人兴趣
  
 - 喜欢福尔摩斯 
   - 海龟汤 [SZ推理之夜](https://space.bilibili.com/3546824214317878?spm_id_from=333.337.0.0) [许木木](https://space.bilibili.com/3546731908171869?spm_id_from=333.337.search-card.all.click)
-    
 - 游戏
   - 瓦 lol 黑猴 想买影之刃零（但是我tm的晕3D）
+- 书
+  - 张居正 [漫天大雪送一人](https://baike.baidu.com/item/%E5%BC%A0%E5%B1%85%E6%AD%A3/279)
 
 ## 今日公告
 
