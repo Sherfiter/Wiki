@@ -38,10 +38,9 @@ function Footer() {
         {/* <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">
           Creative Commons License: BY-NC 4.0
         </a> */}
-        <br />
-        {/* <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer">
-          苏 ICP 备 2020049101 号
-        </a> */}
+        <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer">
+          豫ICP备2026027944号
+        </a>
       </div>
     </div>
   );
