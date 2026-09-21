@@ -13,7 +13,7 @@ export default function Downloads({ segments, data }) {
       <div className="wiki bg-neutral-200/10">
         <h1>镜像站</h1>
         <p className="not-wiki text-slate-600 dark:text-slate-300">
-          这里放一些不方便直接下载的资源（Docker 镜像、ISO、课程资料等），供同学下载。
+          这里放一些不方便直接下载的资源（Docker 镜像、ISO、课程资料等），供同学下载 轻量服务器带宽低下载慢 maybe只是演示作用。
         </p>
 
         <nav className="not-wiki my-4 text-sm text-slate-500">
