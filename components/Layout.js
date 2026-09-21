@@ -21,6 +21,11 @@ function Header() {
                       课程
                     </a>
                   </li>
+                  <li>
+                    <a className="hover:text-sky-500 dark:hover:text-sky-400" href="/downloads/">
+                      镜像站
+                    </a>
+                  </li>
                 </ul>
               </nav>
             </div>
