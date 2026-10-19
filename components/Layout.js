@@ -12,6 +12,11 @@ function Header() {
               <nav className="text-sm leading-6 font-semibold text-slate-700 dark:text-slate-200">
                 <ul className="flex space-x-8">
                   <li>
+                    <a className="hover:text-sky-500 dark:hover:text-sky-400" href="/daily/">
+                      每日速览
+                    </a>
+                  </li>
+                  <li>
                     <a className="hover:text-sky-500 dark:hover:text-sky-400" href="/interesting/2026/">
                       个人兴趣
                     </a>

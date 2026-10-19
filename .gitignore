@@ -32,6 +32,9 @@ pnpm-debug.log*
 *.tsbuildinfo
 next-env.d.ts
 
+# 每日公告的本地缓存
+/.cache/
+
 
 
 .claude

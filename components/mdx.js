@@ -1,5 +1,7 @@
 import { useState } from 'react';
 
+import DailyDigest from './DailyDigest';
+
 const BOX_COLORS = {
   yellow: 'yellow-box',
   red: 'red-box',
@@ -167,4 +169,5 @@ export const mdxComponents = {
   Slideshow,
   Profile,
   Projects,
+  DailyDigest,
 };
