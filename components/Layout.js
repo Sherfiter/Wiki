@@ -6,7 +6,10 @@ function Header() {
       <div className="max-w-8xl mx-auto">
         <div className="py-4 border-b border-slate-900/10 lg:px-8 lg:border-0 dark:border-slate-300/10 mx-4 lg:mx-0">
           <div className="relative flex items-center">
-            <a href="/">Sherfiter&apos;s wiki</a>
+            <a href="/" className="flex items-center">
+              <img src="/brand/sy-mark-mono.svg" alt="" className="h-7 w-7 mr-2" />
+              Sherfiter&apos;s wiki
+            </a>
             <span className="text-xs text-slate-500">&nbsp;for&nbsp;fun</span>
             <div className="relative hidden lg:flex items-center ml-4 pl-4 border-l">
               <nav className="text-sm leading-6 font-semibold text-slate-700 dark:text-slate-200">
@@ -56,7 +59,9 @@ export default function Layout({ title, children }) {
     <>
       <Head>
         <title>{title || "Sherfiter's Wiki"}</title>
-        <link rel="icon" type="image/png" href="/OS/2026/static/img/wiki.png" />
+        <link rel="icon" href="/favicon.ico" sizes="any" />
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <link rel="apple-touch-icon" href="/brand/apple-touch-icon.png" />
         <link rel="stylesheet" href="/vendor/fira-mono/fira-mono.css" />
         <link rel="stylesheet" href="/vendor/lxgw-wenkai/style.css" />
         <link rel="stylesheet" href="/vendor/katex/katex.min.css" />
