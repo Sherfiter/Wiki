@@ -7,6 +7,28 @@ const SOURCES = [
   { name: 'Solidot', url: 'https://www.solidot.org/' },
 ];
 
+function NewsGrid({ groups }) {
+  return (
+    <div className="grid gap-x-8 md:grid-cols-2">
+      {groups.map((g) => (
+        <section key={g.category}>
+          <h4>{g.category}</h4>
+          <ul>
+            {g.items.map((n) => (
+              <li key={n.url}>
+                <a href={n.url} target="_blank" rel="noopener noreferrer" title={n.summary || undefined}>
+                  {n.title}
+                </a>
+                {n.time ? <span className="text-xs opacity-60"> {n.time}</span> : null}
+              </li>
+            ))}
+          </ul>
+        </section>
+      ))}
+    </div>
+  );
+}
+
 export default function DailyDigest({ data, projects = 12, error = '' }) {
   if (!data) {
     return (
@@ -26,6 +48,7 @@ export default function DailyDigest({ data, projects = 12, error = '' }) {
   }
 
   const projectList = (data.projects || []).slice(0, projects);
+  const politicsGroups = data.politics || [];
   const newsGroups = data.news || [];
   const sourceList = data.sources?.length ? data.sources : SOURCES;
 
@@ -65,31 +88,17 @@ export default function DailyDigest({ data, projects = 12, error = '' }) {
         </>
       )}
 
+      {politicsGroups.length > 0 && (
+        <>
+          <h3>时政要闻</h3>
+          <NewsGrid groups={politicsGroups} />
+        </>
+      )}
+
       {newsGroups.length > 0 && (
         <>
           <h3>新闻</h3>
-          <div className="grid gap-x-8 md:grid-cols-2">
-            {newsGroups.map((g) => (
-              <section key={g.category}>
-                <h4>{g.category}</h4>
-                <ul>
-                  {g.items.map((n) => (
-                    <li key={n.url}>
-                      <a
-                        href={n.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        title={n.summary || undefined}
-                      >
-                        {n.title}
-                      </a>
-                      {n.time ? <span className="text-xs opacity-60"> {n.time}</span> : null}
-                    </li>
-                  ))}
-                </ul>
-              </section>
-            ))}
-          </div>
+          <NewsGrid groups={newsGroups} />
           {data.newsMissing?.length > 0 && (
             <p className="text-sm opacity-70 mt-2">
               最近一周没有更新的板块：{data.newsMissing.join('、')}。
