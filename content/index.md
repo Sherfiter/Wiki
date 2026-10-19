@@ -11,6 +11,11 @@ title: Siyuan Qiao
     { name: 'QQ群', value: '622958952', qr: '/OS/2026/static/img/qqgroup.png', qrTitle: 'QQ群二维码' },
     { name: 'WeChat', value: 'jyayst66666', qr: '/OS/2026/static/img/wecode.png', qrTitle: '个人wechat'},
   ]}
+  quote={{
+    text: '谁让你读了这么多书，又知道了双水村以外还有个大世界，如果从小你就在天地里日出而作，日落而息，那你现在就会和众乡亲抱同一个理想。经过几年的辛苦，像大哥一样娶个满意的媳妇，生个胖儿子，加上你的体魄，会成为一名出色的庄家人。不幸的是，你知道太多了，思考的太多了，因此才有了这种不为周围人所理解的苦恼。',
+    book: '平凡的世界',
+    href: 'https://zhuanlan.zhihu.com/p/428881842',
+  }}
 >
 
 # 乔思源

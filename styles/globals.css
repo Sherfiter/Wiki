@@ -271,7 +271,7 @@
 
 /* ---------------- homepage profile sidebar (content/index.md) ---------------- */
 .profile-layout{display:flex;align-items:flex-start;gap:0}
-.profile-sidebar{flex:0 0 auto;display:flex;flex-direction:column;align-items:center;gap:1.25rem;padding-right:1.75rem}
+.profile-sidebar{flex:0 0 auto;display:flex;flex-direction:column;align-items:center;gap:1.25rem;padding-right:1.75rem;max-width:15rem}
 .profile-avatar{width:7rem;height:7rem;border-radius:9999px;object-fit:cover;display:block;margin:0;box-shadow:0 0 0 4px #fff,0 14px 28px -8px rgba(15,23,42,.28)}
 .profile-links{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;align-items:center;gap:.8rem}
 .profile-links li{display:flex;flex-direction:row;align-items:baseline;justify-content:flex-start;gap:.35rem;margin:0;padding:0}
@@ -283,11 +283,20 @@
 .profile-plain-text{display:block;text-align:center;white-space:nowrap;font-size:.8125rem;line-height:1.4;color:rgb(51 65 85);user-select:all}
 .profile-body{flex:1 1 auto;min-width:0;padding-left:1.75rem;border-left:1px solid rgba(226,232,240,.9)}
 .profile-body h1{padding-top:0}
+
+/* ---------------- homepage sidebar quote (content/index.md) ---------------- */
+.profile-quote{margin:.25rem 0 0;padding:0;width:100%;text-align:left}
+.profile-quote blockquote{margin:0;padding:0 0 0 .6rem;border-left:2px solid rgb(203 213 225);font-family:'LXGW WenKai',Kaiti SC,STKaiti,KaiTi,sans-serif;font-size:.75rem;line-height:1.7;font-style:normal;color:rgb(71 85 105);text-indent:0;text-align:justify}
+.profile-quote figcaption{margin-top:.5rem;font-size:.6875rem;line-height:1.4;color:rgb(100 116 139);text-align:right}
+.profile-quote figcaption a{color:inherit;text-decoration:none}
+.profile-quote figcaption a:hover{color:rgb(30 27 75);text-decoration:underline}
+
 @media (max-width:640px){
   .profile-layout{flex-direction:column}
-  .profile-sidebar{flex-direction:row;flex-wrap:wrap;justify-content:center;width:100%;padding-right:0}
+  .profile-sidebar{flex-direction:row;flex-wrap:wrap;justify-content:center;width:100%;max-width:none;padding-right:0}
   .profile-avatar{width:6rem;height:6rem}
   .profile-links{width:auto;flex-direction:row;flex-wrap:wrap;justify-content:center}
+  .profile-quote{width:100%;max-width:22rem}
   .profile-body{padding-left:0;border-left:0;margin-top:1rem;padding-top:1.25rem;border-top:1px solid rgba(226,232,240,.9)}
 }
 

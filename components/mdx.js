@@ -57,7 +57,7 @@ function Quiz({ title, question, options, answer, comment }) {
   );
 }
 
-function Profile({ avatar, name, links = [], children }) {
+function Profile({ avatar, name, links = [], quote, children }) {
   const [qr, setQr] = useState(null);
 
   const renderLink = (link) => {
@@ -92,6 +92,20 @@ function Profile({ avatar, name, links = [], children }) {
             </li>
           ))}
         </ul>
+        {quote && (
+          <figure className="profile-quote">
+            <blockquote>{quote.text}</blockquote>
+            <figcaption>
+              <a
+                href={quote.href}
+                target={quote.href?.startsWith('http') ? '_blank' : undefined}
+                rel={quote.href?.startsWith('http') ? 'noopener noreferrer' : undefined}
+              >
+                ——《{quote.book}》
+              </a>
+            </figcaption>
+          </figure>
+        )}
       </aside>
       <div className="profile-body">{children}</div>
       {qr && (
