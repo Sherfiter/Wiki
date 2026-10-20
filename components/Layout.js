@@ -1,5 +1,7 @@
 import Head from 'next/head';
 
+import VisitorCounter from './VisitorCounter';
+
 function Header() {
   return (
     <div className="sticky top-0 z-40 w-full backdrop-blur flex-none border-b border-slate-900/10 bg-white/75 supports-backdrop-blur:bg-white/60">
@@ -43,12 +45,15 @@ function Footer() {
   return (
     <div className="bg-neutral-100 text-center text-neutral-600 dark:bg-neutral-600 dark:text-neutral-200 lg:text-left">
       <div className="bg-neutral-200 p-6 text-center dark:bg-neutral-700">
-        {/* <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">
-          Creative Commons License: BY-NC 4.0
-        </a> */}
-        <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer">
-          豫ICP备2026027944号
-        </a>
+        <VisitorCounter />
+        <div className="mt-1">
+          {/* <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">
+            Creative Commons License: BY-NC 4.0
+          </a> */}
+          <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer">
+            豫ICP备2026027944号
+          </a>
+        </div>
       </div>
     </div>
   );
