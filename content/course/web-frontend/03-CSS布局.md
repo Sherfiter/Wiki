@@ -4,107 +4,102 @@ title: "第 3 章 · CSS 布局"
 
 # 第 3 章 · CSS 布局
 
-这章讲盒子怎么「摆」：定位/浮动是上一代手段，flex/grid 是现代一维/二维主力，媒体查询做响应式。
+CSS 入门到入坑的分水岭就在布局:散着写几个属性谁都会,但「这个元素为什么跑这儿了」一旦发生,不懂布局模型的人只能瞎改。本章按「定位 → 浮动(历史课)→ flex → grid → 响应式」推进,我的学习路径建议是:前两节理解原理即可,**80% 的日常布局交给 flex 和 grid**,它们是为了「不用理解文档流玄学」而生的。
 
-## 3.1 定位（position）
+## 3.1 定位:五档坐标系
 
-`position` 决定元素参照哪个坐标系摆放：
+`position` 决定元素以什么为参照物摆放:
 
-| 值 | 参照系 | 是否脱离文档流 | 典型用途 |
+| 值 | 参照 | 脱离文档流 | 典型用途 |
 |---|---|---|---|
-| `static` | 默认，按文档流 | 否 | 普通布局 |
-| `relative` | 自身原位置偏移 | 否（占位保留） | 微调、给 absolute 当锚点 |
-| `absolute` | 最近的已定位祖先 | 是 | 弹窗、角标 |
-| `fixed` | 视口（viewport） | 是 | 悬浮导航、返回顶部 |
-| `sticky` | 滚动容器，滚过阈值后固定 | 否（占位保留） | 吸顶表头 |
+| static | 默认文档流 | 否 | 不写定位就是它 |
+| relative | 自己原来的位置 | 否(占位保留) | 微调、给 absolute 当锚 |
+| absolute | 最近的已定位祖先 | 是 | 角标、弹层 |
+| fixed | 浏览器视口 | 是 | 悬浮按钮、吸底导航 |
+| sticky | 滚动容器 | 否(占位保留) | 吸顶表头 |
+
+最常用的组合是「父 relative + 子 absolute」:父元素设 relative(哪怕 offset 全 0)成为锚点,子元素的 top/right 才有正确的参照:
 
 ```css
-.parent { position: relative; }
-.badge {
-  position: absolute;
-  top: -8px; right: -8px;   /* 相对 .parent 右上角冒出 */
-}
-.topbar { position: fixed; top: 0; left: 0; right: 0; }
-th { position: sticky; top: 0; }   /* 表格表头滚动时吸顶 */
+.card { position: relative; }
+.card .badge { position: absolute; top: -8px; right: -8px; }  /* 右上角冒出去 */
 ```
 
-- `absolute`/`fixed` 脱离文档流后，原位置被后续元素补上，可能重叠。
-- `relative` 只偏移视觉位置，占位仍在，最常用作 `absolute` 的锚点。
+absolute 脱离文档流后原位置塌掉,后续元素会补上来,重叠就发生在这。fixed 相对视口,滚动时纹丝不动(注意:祖先有 transform 时 fixed 会改相对那个祖先,灵异问题之一)。sticky 是现代宝藏:`position: sticky; top: 0` 的表头滚过就吸顶,一行 CSS 替代过去几十行 JS 监听滚动。
 
-## 3.2 浮动（float）
+## 3.2 浮动:上一代的遗产
+
+float 的出身是「文字环绕图片」(杂志排版),被上一代开发者硬当布局用,然后踩了几十年「父容器高度塌陷」的坑:子元素全部浮动后脱离文档流,父容器高度归零,后面的内容窜上来。
 
 ```css
-img { float: left; margin-right: 12px; }   /* 图片左浮，文字右侧环绕 */
+.clearfix::after { content: ""; display: block; clear: both; }   /* 经典清浮动补丁 */
 ```
 
-- 浮动元素脱离文档流，父容器会「塌陷」（高度丢失），需清除浮动：
+今天还需要它吗?文字环绕(真正本职)用它;布局别用,flex 完胜。认识 float 和 clearfix 的价值在于:接手老项目和看懂「前辈为什么要转行用 flex」。
 
-```css
-.clearfix::after {
-  content: "";
-  display: block;
-  clear: both;
-}
-```
+## 3.3 Flexbox:一维布局的答案
 
-> 对比：`position` 用参照系+偏移精确定位（弹窗/悬浮/吸顶），`float` 本质是文字环绕、当布局用会踩「父容器塌陷」的坑。
-
-## 3.3 Flexbox：一维布局
-
-flex 沿一条主轴排列子项：
+把容器变成 flex 后,子项沿一条主轴排列,几乎覆盖所有「一排/一列」的需求:
 
 ```css
 .container {
   display: flex;
-  flex-direction: row;            /* 主轴方向：row | column */
-  justify-content: space-between; /* 主轴对齐 */
-  align-items: center;            /* 交叉轴对齐 */
-  gap: 16px;                      /* 子项间距 */
+  flex-direction: row;             /* 主轴:row | column */
+  justify-content: space-between;  /* 主轴对齐(两端分散) */
+  align-items: center;             /* 交叉轴对齐(垂直居中) */
+  gap: 16px;                       /* 子项间距,比 margin 干净 */
 }
-.item { flex: 1; }                /* 均分剩余空间 */
+.item { flex: 1; }                 /* 均分剩余空间 */
 ```
 
-- `justify-content` 管主轴，`align-items` 管交叉轴。
-- `flex: 1` 是 `flex-grow:1; flex-shrink:1; flex-basis:0` 的简写，表示按比例瓜分剩余空间。
-- 经典场景：水平导航、卡片等宽排列、垂直居中。
-
-## 3.4 Grid：二维布局
-
-grid 同时控制行与列：
+三件套记忆法:**justify-content 管主轴方向的对齐,align-items 管交叉轴的垂直对齐,flex 子项属性管怎么分地盘**。`flex: 1` 是 `flex-grow:1; flex-shrink:1; flex-basis:0%` 的简写:地盘按份均分,空间不够按比例收缩。那道「CSS 怎么垂直居中」的世纪难题,flex 时代的答案就两行:
 
 ```css
-.container {
+.center { display: flex; justify-content: center; align-items: center; }
+```
+
+导航条、卡片横排、侧边栏 + 内容的「左固定右自适应」(`.sidebar { flex: 0 0 200px } .main { flex: 1 }`),全是 flex 的舒适区。
+
+## 3.4 Grid:二维骨架
+
+grid 同时管行和列,先画格子再放东西:
+
+```css
+.page {
   display: grid;
-  grid-template-columns: 200px 1fr 1fr;  /* 三列：固定 + 均分 + 均分 */
-  grid-template-rows: auto 1fr auto;     /* 三行：内容 + 撑满 + 内容 */
-  gap: 16px;
+  grid-template-columns: 240px 1fr;   /* 侧栏 + 主区 */
+  grid-template-rows: auto 1fr auto;  /* 头 / 主体撑满 / 脚 */
+  min-height: 100vh;
 }
-.header { grid-column: 1 / -1; }   /* 横跨整行 */
+.page > header { grid-column: 1 / -1; }   /* 头部横跨两列(-1 = 最后一条线) */
+.page > footer { grid-column: 1 / -1; }
 ```
 
-- `1fr` 按份分配剩余空间，`auto` 按内容自适应。
-- `grid-column: 1 / -1` 用网格线定位，`-1` 表示最后一条线。
-- 经典场景：整页「圣杯布局」（header / 侧栏 / 主体 / footer）几行搞定。
+`fr` 是「份」(1fr 和 2fr 按 1:2 分剩余空间),配合 `minmax(200px, 1fr)` 可以表达「最少 200,多余随便」。响应式网格的神级一行:`grid-template-columns: repeat(auto-fill, minmax(240px, 1fr))`,容器塞得下几列就几列,卡片墙零媒体查询自适应。选型口径:**整页骨架、需要行列对齐,grid;一排东西的排布,flex**;两者嵌套组合(外 grid 搭骨架,内 flex 排细节)是常态,不是二选一。
 
-> 对比：flex 一维（单轴），grid 二维（行列同时）；flex 适合线性排列，grid 适合网格骨架。可嵌套：外层 grid 搭骨架，内层 flex 排细节。
-
-## 3.5 响应式：媒体查询
-
-媒体查询按设备特征（宽度、方向、分辨率）切换样式：
+## 3.5 响应式:媒体查询与移动优先
 
 ```css
-/* 移动优先：先写窄屏基础样式，再逐步增强 */
-.card { flex-direction: column; }
+/* 移动优先:基础样式按手机写,向上增强 */
+.cards { flex-direction: column; }
 
-@media (min-width: 768px) {
-  .card { flex-direction: row; }
-}
-
-@media (min-width: 1200px) {
-  .container { max-width: 1140px; margin: 0 auto; }
+@media (min-width: 768px) {     /* 平板起,变成横排 */
+  .cards { flex-direction: row; }
 }
 ```
 
-- `min-width` 移动优先（从小到大叠加），`max-width` 桌面优先（从大到小覆盖）。
-- 断点常取 576 / 768 / 992 / 1200，更应按内容需要设置。
-- 生效前提是 HTML 有 `viewport` 声明（第 1 章），否则手机按桌面宽度缩放，媒体查询失效。
+`min-width` 写法(移动优先)是现代惯例:从小屏往上叠加,窄屏的简单规则是地基。断点数字(576/768/992/1200)是参考,真正的原则是**内容什么时候挤了,断点就设在哪**。媒体查询生效的前提是第 1 章那个 viewport meta(漏了它手机按桌面宽渲染,一切媒体查询白写)。DevTools 的设备模拟器(Ctrl+Shift+M)是响应式开发的显微镜,写完必过一遍。
+
+## 常见错误
+
+- **absolute 找不到参照**。父元素忘了 relative,absolute 直接相对整个页面定位,元素飞到天边;「先给父设 relative」形成肌肉记忆。
+- **flex 子项挤压不收缩**。子项里是长文本/固定宽度内容,加 `min-width: 0`(flex 子项默认不能小于内容宽度,这个默认值反直觉)。
+- **grid 卡片高度不齐**。想让行内等高,`align-items: stretch`(默认)被你覆盖了;等高的坑常在 align 系属性。
+- **手机上看媒体查询没反应**。viewport meta 缺失,回第 1 章。
+
+## 练习
+
+1. 动手:用 grid 搭「圣杯布局」(顶部导航、左侧栏、主区、底部),主区里用 flex 放一排卡片;窄屏时侧栏收到顶部(媒体查询改 grid-template)。
+2. 动手:sticky 实战:一个长列表加吸顶表头和右侧悬浮「回到顶部」按钮(fixed),手机模拟器里滚一遍。
+3. 动手:用 `repeat(auto-fill, minmax(240px, 1fr))` 做自适应卡片墙,拖动 DevTools 窗口宽度看列数自动增减,零媒体查询。
+4. 思考:float 时代做「侧栏 + 主区」要清浮动、算宽度;flex 时代两行。从「布局意图的表达成本」角度,想想为什么 CSS 工作组要在 flex/grid 上花十几年,再看一眼 Chrome DevTools 里 Flexbox/Grid 的可视化调试面板(勾选 overlay),体会工具演进和规范演进的关系。

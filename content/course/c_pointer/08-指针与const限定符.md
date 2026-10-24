@@ -1,116 +1,91 @@
 ---
-title: "第 8 章 · 指针与 const 及限定符"
+title: "第 8 章 · 指针与 const 限定符"
 ---
 
-# 第 8 章 · 指针与 const 及限定符
+# 第 8 章 · 指针与 const 限定符
 
-`const` 是给编译器的「承诺」；`restrict`/`volatile` 是「优化提示」。
+const 和指针的组合,是每个 C 学习者都要过的「读声明」关:`const int *p`、`int *const p`、`const int *const p`,三胞胎考倒一片。本章的目标有三个:把声明读法练成肌肉记忆(从右往左)、把「const 是视角不是属性」这个本质说透(违它的约就是 UB)、顺带把另外两个限定符 restrict 和 volatile 一起结清,它们是 C 优化世界的三张契约。原文小节编号错成 7.x,一并修正。
 
-## 7.1 从右往左读 const
-
-`const` 和指针结合，位置不同、意义不同。**从变量名往左读**最清楚：
+## 8.1 读法:从右往左,一步一个修饰
 
 ```c
-const int *p;      // p 是「指向 const int 的指针」：指向的内容不能改
-int const *p;      // 与上面完全相同（const 在 int 前后等价）
-int *const p;      // p 是「const 指针」：指针本身不能改
-const int *const p; // 指针和内容都不能改
+const int *p;         // p 是 指针 → 指向 int → int 是 const:内容不可改,指针可改
+int *const p;         // p 是 const → 常量指针 → 指向 int:指针不可改,内容可改
+const int *const p;   // 双 const:都不许改
 ```
 
-| 声明 | 读作 | 能改 `*p` | 能改 `p` |
-|---|---|---|---|
-| `const int *p` | 指向常量的指针 | 否 | 是 |
-| `int *const p` | 常量指针 | 是 | 否 |
-| `const int *const p` | 指向常量的常量指针 | 否 | 否 |
+口诀:「const 在 * 左边,约束内容;const 在 * 右边,约束指针本身」。三行的可改矩阵:
+
+| 声明 | `*p = x` 改内容 | `p = &y` 改指向 |
+|---|---|---|
+| `const int *p` | ✗ | ✓ |
+| `int *const p` | ✓ | ✗ |
+| `const int *const p` | ✗ | ✗ |
+
+(`int const *p` 和 `const int *p` 完全等价,const 贴左贴右随缘,但贴 * 的位置决定约束对象,这个不能乱。)
+
+## 8.2 本质:const 是「视角」,不是「内存属性」
+
+最容易误解的一点:`const int *p = &x;` **不代表 x 真的是常量**。x 本身可能是个普通 int,只是「通过 p 这条路」不许写:
 
 ```c
-int x = 1, y = 2;
-const int *p = &x;   // 允许：用「只读视角」看 x
-// *p = 10;          // 编译错误
-p = &y;              // 指针本身可改
+int x = 10;                    // x 完全可写
+const int *p = &x;             // p 是只读视角
+// *p = 20;                    // 编译错误:这条路禁行
+x = 20;                        // 直接走 x 这条路,完全合法
 
-int *const q = &x;   // q 永远指向 x
-*q = 10;             // 可改内容
-// q = &y;           // 编译错误
+const int y = 10;              // 这次 y 真是 const
+int *q = (int *)&y;            // 强转丢掉 const
+*q = 99;                       // UB:y 在只读段可能崩;编译器按 y≡10 优化,行为不可测
 ```
 
-> `const int *p` 不代表 x 真是常量，只代表「通过 p 这个指针你不许写」；同一块内存可有只读/可写两个视角。
+前半段是 const 的正确用途(一个变量,多种访问权限);后半段是违约(强转丢 const 再写),后果见计组课 UB 的经典描述:编译器可能早就把所有读 y 的地方替换成 10,你写进去的 99 根本没人看见。「通过某种途径写 const 对象」是未定义行为,第 14 章的清单会再见到它。
 
-## 7.2 丢弃 const 是危险的
+## 8.3 函数参数:const 用得最多、性价比最高的地方
 
-把 `const` 指针强转成非 const 再写，是典型的自欺欺人：
+只读参数一律加 const,这是 C 工程的门槛级习惯:
 
 ```c
-const int x = 10;
-int *p = (int*)&x;   // 丢掉 const
-*p = 20;             // 未定义行为（若 x 真在只读段，直接崩）
+size_t my_strlen(const char *s);              // 承诺:不改 s
+char *my_strcpy(char *dst, const char *src);  // 只改 dst,src 只读
 ```
 
-- 如果 `x` 是**只读段/常量**，写它是 UB，可能段错误。
-- 即使侥幸没崩，编译器可能已经按「x 恒为 10」做了优化，`*p = 20` 后的行为完全不可预期。
+三个收益:调用者放心传字符串字面量和其他只读数据;编译器帮你拦截函数体内的手滑;接口自文档(看到 const 就知道谁是入参谁是出参)。glibc 的原型全是这个风格,你的代码没理由不跟。
 
-## 7.3 函数参数用 const：接口即文档
+## 8.4 restrict:把「不重叠」写进契约
 
-只读参数写 `const`，是 C 里最实用的习惯——既防手滑，又是自文档：
-
-```c
-void print(const char *s);          // 承诺不修改 s
-void copy(char *dst, const char *src);  // 只改 dst，不改 src
-```
-
-这让调用者放心传字符串字面量，也让编译器能在只读段复用数据。
-
-## 7.4 restrict：承诺「不别名」
-
-`restrict`（C99）告诉编译器：**这个指针指向的内存，只能通过这一个指针访问**，没有别的指针和它指向同一块。编译器据此做激进优化。
+restrict(C99)是对编译器的性能承诺:**这块内存只会通过这个指针访问**,没有别名。有了承诺,编译器才敢做重排和向量化:
 
 ```c
-void add(int n, int *restrict a, const int *restrict b) {
-    for (int i = 0; i < n; i++) a[i] += b[i];
+void add_arrays(int n, int *restrict a, const int *restrict b) {
+    for (int i = 0; i < n; i++)
+        a[i] += b[i];      // 有 restrict:编译器知道写 a 不会影响读 b,放心流水
 }
 ```
 
-- 若 a、b 重叠（别名），`restrict` 就违背了，行为**未定义**。
-- 效果：编译器可以并行/重排内存访问，不必每次写 `a[i]` 都担心影响 `b[i]` 的读。
-- 典型收益在数值计算、`memcpy`（原型里 `restrict` 让编译器用 SIMD 批量拷贝）。
+没有 restrict 时,编译器必须防着 `a` 和 `b` 指向同一块内存(写 a[i] 可能改变 b[i] 的值),每次都要保守;有了 restrict, SIMD 批量处理解锁,数值代码常见百分之几十的提速。违约的代价照例是 UB:glibc 的 memcpy 原型就带 restrict,所以**重叠拷贝必须用 memmove**(它内部的启发式会先判断方向再拷),这是这个契约最著名的应用场景。
+
+## 8.5 volatile:每次都来真的
+
+volatile 和 restrict 方向相反,它是**负优化**契约:告诉编译器「这个变量会被你看不见的东西改变」,于是不许缓存进寄存器、不许合并访问、不许假设两次读值相同:
 
 ```c
-void *memcpy(void *restrict dest, const void *restrict src, size_t n);
-// 注意：dest 和 src 重叠时该用 memmove，而不是 memcpy
+volatile int *status = (volatile int *)0x4000;   // 假设是设备状态寄存器
+while (*status == 0) { }    // 没有 volatile:编译器只读一次,死循环;有 volatile:每轮真读
 ```
 
-## 7.5 volatile：每次都从内存读
+三大用武之地:MMIO 硬件寄存器(计组课第 9 章:设备状态自己会变)、信号处理函数共享的 sig_atomic_t 变量、setjmp/longjmp 跨越的局部变量。**必须钉死的一条**:volatile 不是线程同步工具,它不保证原子性、不建立内存屏障,多线程标志位请用 C11 的 `_Atomic` 或锁。把 volatile 用在普通多线程代码上,是我见过最流行的「感觉在防,其实在裸奔」的写法。
 
-`volatile` 和 `const` 相反——它告诉编译器：**这个变量可能被「你之外的东西」改变**，每次访问都必须真的读写内存，不许缓存进寄存器、不许省略。
+## 常见错误
 
-```c
-volatile int *status = (int*)0x4000;  // 内存映射 IO 寄存器
-while (*status == 0) { /* 忙等 */ }   // 每次循环都重新读内存
-```
+- **三胞胎读反**。8.1 的矩阵背熟;拿不准就从右往左读一遍。
+- **以为 const 让编译器把变量放进只读段**。局部 const 变量照样在栈上,「能不能写」取决于它声明的类型,和内存位置是两回事(全局 const 才可能进 .rodata)。
+- **memcpy 拷重叠区间**。UB,轻则数据错乱,重则SIMD指令行为诡异;重叠一律 memmove。
+- **多线程标志用 volatile 就放心了**。不原子、无屏障, races 照样发生;用 _Atomic。
 
-典型用途：
+## 练习
 
-- **内存映射硬件寄存器**（MMIO）：设备会自己改值。
-- **信号处理器 / 多线程共享标志**：`sig_atomic_t` + `volatile`。
-- **`setjmp`/`longjmp` 之间被改的变量**。
-
-> 注意：`volatile` **不是**线程同步工具，不保证原子性、不建内存屏障。多线程正确同步要用 `_Atomic`（C11）或锁，`volatile` 只是「别优化掉这次访问」。
-
-## 7.6 限定符与指针的「内层/外层」
-
-限定符也有层级，和指针层级对应：
-
-```c
-int *volatile p;        // p 是 volatile 指针（指针本身易变）
-volatile int *p;        // 指向 volatile int（指向的内容易变）
-const int *const p;     // 指向 const 的 const 指针
-```
-
-## 7.7 与汇编 / 其他语言对照
-
-- **汇编**：`const`/`restrict` 是**纯编译期**概念，进汇编后消失，只影响优化；`volatile` 直接阻止优化，强制生成每次访问指令。
-- **Java**：`final` 类似 `const`（引用不可改绑，对象内容仍可变，类似 `T *const`）；没有 `restrict` 和 `volatile` 的对应物（Java 的 `volatile` 是内存屏障语义，完全不同）。
-- **C++**：`const`/`volatile` 语义与 C 相同，还有 `constexpr`；`restrict` 在 C++ 非标准，各家编译器用 `__restrict`。
-- **Python**：无类型系统层面的 const，纯靠约定（`_name`、`NAME`）。
-
-> `const`=「不许通过我写」；`restrict`=「只有我能访问」；`volatile`=「别优化、每次都读」。违约 = UB。
+1. 手算:解释 `int *(*p)[3]`、`int (*(*p)[3])()`(别慌,第 13 章的方法论,这里只需第一个)分别读作什么;写出「指向「含 5 个 const char* 的数组」的指针」的声明。
+2. 动手:写 `void swap_if_larger(int *restrict a, int *restrict b)`,测试重叠调用(`swap_if_larger(&x, &x)`)是否真的违约(用 -O2 看汇编里是否出现激进优化);再对比 memcpy 与 memmove 在 `memcpy(buf, buf+1, 7)` 下的输出差异。
+3. 动手:模拟 MMIO:用一块普通数组假装设备寄存器,开一个线程(或用 gdb 手改内存)修改它,主循环读它的值,分别在有、无 volatile 下观察编译器(-O2)生成的循环是否重新加载。
+4. 思考:`const` 关键字在 C 里的执行者是编译器(编译期拦截),在内存硬件层几乎没有痕迹(局部变量照样可写)。对比 Java 的 final、硬件的写保护页(操作系统课第 6 章),说说「不可变」在三个层次上分别由谁执行、各能拦住谁。

@@ -172,3 +172,10 @@ sudo groupadd devs           # 新建组
 - Linux 组 ≈ Windows 用户组（`Users`、`Administrators`）
 - 区别：Windows 用「域 / Active Directory」管企业多台机器，
   Linux 靠本地文本文件 `passwd`、`group` 完成同样的事
+
+## 0.7 练习
+
+1. 动手:在虚拟机或 WSL 里确认 `uname -r`(内核版本)、`cat /etc/os-release`(发行版),对照 0.1/0.2 辨认「这是谁的内核、谁家的发行版」。
+2. 动手:用 `ls -l` 找三个权限不同的文件,解读各自的「三档九位」;练习 chmod 755/644/600 各一次,并用一个非属主账号验证效果。
+3. 动手:用 apt(或 dnf)安装、卸载一个小软件(如 sl),体验包管理器自动处理依赖;再 `apt show sl` 看包的元数据。
+4. 思考:Windows 的 ACL 和 Linux 的三档九位,粒度与复杂度各在哪个极端?如果你在设计一个「家庭 NAS 的共享目录」,选哪种模型?为什么服务器世界普遍选了简单的那边?
