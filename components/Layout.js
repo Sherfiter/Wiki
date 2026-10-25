@@ -13,9 +13,14 @@ function Header() {
               Sherfiter&apos;s wiki
             </a>
             <span className="text-xs text-slate-500">&nbsp;for&nbsp;fun</span>
-            <div className="relative hidden lg:flex items-center ml-4 pl-4 border-l">
-              <nav className="text-sm leading-6 font-semibold text-slate-700 dark:text-slate-200">
-                <ul className="flex space-x-8">
+            <div className="relative flex flex-wrap items-center">
+              <a href="/" className="flex items-center">
+                <img src="/brand/sy-mark-mono.svg" alt="" width="28" height="28" className="h-7 w-7 mr-2" />
+                Sherfiter&apos;s wiki
+              </a>
+              <span className="text-xs text-slate-500">&nbsp;for&nbsp;fun</span>
+              <nav className="text-sm leading-6 font-semibold text-slate-700 dark:text-slate-200 w-full sm:w-auto mt-2 sm:mt-0 sm:ml-4 sm:pl-4 sm:border-l">
+                <ul className="flex space-x-6 sm:space-x-8 whitespace-nowrap overflow-x-auto">
                   <li>
                     <a className="hover:text-sky-500 dark:hover:text-sky-400" href="/daily/">
                       每日速览
