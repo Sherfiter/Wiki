@@ -80,7 +80,7 @@ deactivate                  # 退出
 
 ## 练习
 
-1. 动手:装好 Python 3.12+,建 venv 并激活,`pip -V` 与 `python3 -V` 的输出截图/记录;在 REPL 里跑 `import this`(Python 之禅,本书的精神纲领)。
+1. 动手:装好 Python 3.12+,建 venv 并激活,`pip -V` 与 `python3 -V` 的输出截图/记录;在 REPL 里跑 `import this`(Python 之禅,本课的精神纲领)。
 2. 动手:写第一个脚本:问用户两个数,打印和、差、积、商(f-string 格式化,保留两位小数)。故意输入字母,观察报错原文,从下往上读一遍(第 5 章异常的预习)。
 3. 动手:pip install cowsay(一个逗趣打印库),在 REPL 里 `import cowsay; cowsay.cow("Hello!")`;再 `pip freeze` 看看这个环境多了什么。
 4. 思考:对比 Java 的 Maven/Gradle 和 Python 的 pip/venv:两边的「依赖隔离」哲学有何异同?为什么 Python 社区历史上默认「全局安装」而 Java 默认「项目级」?(提示:两者的典型部署场景,脚本 vs 企业应用。)
