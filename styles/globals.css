@@ -310,6 +310,9 @@
 .project-lang{font-size:.6875rem;line-height:1;padding:.2rem .5rem;border-radius:9999px;background-color:rgba(226,232,240,.8);color:rgb(71 85 105);white-space:nowrap}
 .project-desc{margin:.35rem 0 0;font-size:.8125rem;line-height:1.5;color:rgb(100 116 139);text-align:left;text-indent:0}
 
+/* 表情符号单独走系统 emoji 字体，避免文楷缺字时显示成方块 */
+.emoji{font-family:"Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji","Android Emoji","EmojiSymbols",sans-serif;font-weight:400;font-style:normal}
+
 /* ---------------- wiki 正文字号微调 ---------------- */
 .wiki{font-size:.9375rem}
 .wiki h1{font-size:1.375rem}
