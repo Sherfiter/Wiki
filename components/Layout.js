@@ -30,6 +30,16 @@ function Header() {
                     课程
                   </a>
                 </li>
+                <li>
+                  <a className="hover:text-sky-500 dark:hover:text-sky-400" href="/notes/">
+                    讲义
+                  </a>
+                </li>
+                <li>
+                  <a className="hover:text-sky-500 dark:hover:text-sky-400" href="/links/">
+                    友链
+                  </a>
+                </li>
               </ul>
             </nav>
           </div>
